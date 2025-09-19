@@ -10,7 +10,7 @@ CRGB monPixel;
 #include <MicroOscSlip.h>
 // Le nombre 128 entre les < > ci-dessous est le nombre maximal d'octets réservés pour les messages entrants.
 
-// Les messages sortants sont écrits directement sur la sortie et ne nécessitent pas de réservation d'octets supplémentaires.
+// Les messages sortants sont écrits directement sur la sortie et ne nécessitent pas de réservation d'octets supplémentaires. aa
 
 MicroOscSlip<128> monOsc(&Serial);
  
