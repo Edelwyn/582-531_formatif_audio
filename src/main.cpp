@@ -13,47 +13,48 @@ CRGB monPixel;
 // Les messages sortants sont écrits directement sur la sortie et ne nécessitent pas de réservation d'octets supplémentaires. aa
 
 MicroOscSlip<128> monOsc(&Serial);
- 
- 
-void setup() {
+
+void setup()
+{
 
   Serial.begin(115200);
 
-  pinMode( MA_BROCHE_BOUTON , INPUT );
+  pinMode(MA_BROCHE_BOUTON, INPUT);
 
-  FastLED.addLeds<WS2812,27,GRB>( & monPixel, 1);
-
+  FastLED.addLeds<WS2812, 27, GRB>(&monPixel, 1);
 }
- 
-void loop() {
+
+void loop()
+{
 
   int maLectureAngle;
 
   maLectureAngle = analogRead(MA_BROCHE_ANGLE);
 
-  int maLectureBouton = digitalRead( MA_BROCHE_BOUTON );
+  int maLectureBouton = digitalRead(MA_BROCHE_BOUTON);
 
-  //Serial.println(maLectureBouton);
+  // Serial.println(maLectureBouton);
 
- 
-  monOsc.sendInt("/bouton",maLectureBouton);
+  monOsc.sendInt("/bouton", maLectureBouton);
 
-  monOsc.sendInt("/angle",maLectureAngle);
+  monOsc.sendInt("/angle", maLectureAngle);
 
   delay(100);
- 
-  if(maLectureAngle > 2000) {
 
-    monPixel = CRGB(0, 50,255);
+  if (maLectureAngle > 2000)
+  {
 
-    FastLED.show();
+    monPixel = CRGB(0, 50, 255);
 
-  }else {
-
-    monPixel = CRGB(150, 100,0);
     FastLED.show();
   }
- 
- 
+  else
+  {
+
+    monPixel = CRGB(150, 100, 0);
+    FastLED.show();
+  }
+  delay(50);
+  monOsc.sendInt("/pot", maLectureAngle);
+  monOsc.sendInt("/but", maLectureBouton);
 }
- 
